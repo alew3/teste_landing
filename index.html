@@ -6,57 +6,112 @@
 <title>Alessandro Cauduro</title>
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <style>
-  :root { --bg:#0f172a; --fg:#f8fafc; --muted:#94a3b8; --accent:#6366f1; --card:#1e293b; }
+  /* Design system Raízes — fontes */
+  @font-face { font-family:"Literata"; src:url(assets/fonts/Literata-latin-opsz-normal.woff2) format("woff2"); font-weight:200 900; font-style:normal; font-display:swap; }
+  @font-face { font-family:"Literata"; src:url(assets/fonts/Literata-latin-opsz-italic.woff2) format("woff2"); font-weight:200 900; font-style:italic; font-display:swap; }
+  @font-face { font-family:"Outfit"; src:url(assets/fonts/Outfit-latin-wght-normal.woff2) format("woff2"); font-weight:100 900; font-style:normal; font-display:swap; }
+  @font-face { font-family:"Courier Prime"; src:url(assets/fonts/CourierPrime-latin-400-normal.woff2) format("woff2"); font-weight:400; font-display:swap; }
+  @font-face { font-family:"Courier Prime"; src:url(assets/fonts/CourierPrime-latin-700-normal.woff2) format("woff2"); font-weight:700; font-display:swap; }
+
+  /* Design system Raízes — tokens (tema claro) */
+  :root {
+    --espresso:#2e1a10; --creme:#f3e7d7; --kraft:#b89677;
+    --fundo:var(--creme); --superficie:#fbf5ec; --superficie-kraft:#e6d6c1;
+    --linha:#d6c3aa; --linha-forte:#7a5a43;
+    --tinta:var(--espresso); --tinta-suave:#6b4e3a;
+    --acento:#b5652b; --acento-texto:#8a3902;
+    --acao:var(--espresso); --sobre-acao:var(--creme);
+    --destaque:#964202; --sobre-destaque:var(--creme);
+    --foco:#8a3902;
+    --serif:"Literata", Georgia, "Times New Roman", serif;
+    --sans:"Outfit", "Helvetica Neue", Arial, sans-serif;
+    --dado:"Courier Prime", "Courier New", monospace;
+    --espaco-1:4px; --espaco-2:8px; --espaco-3:12px; --espaco-4:16px; --espaco-5:24px;
+    --espaco-6:32px; --espaco-7:48px; --espaco-8:64px; --espaco-9:96px;
+    --raio-1:2px; --raio-2:6px; --raio-cheio:999px;
+    --fio:1px; --fio-forte:2px;
+  }
+  /* tema escuro */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fundo:var(--espresso); --superficie:#3a2418; --superficie-kraft:#4a3020;
+      --linha:#5a3a26; --linha-forte:#bfa78f;
+      --tinta:var(--creme); --tinta-suave:#bfa78f;
+      --acento:#e28c52; --acento-texto:#e6a06f;
+      --acao:var(--creme); --sobre-acao:var(--espresso);
+      --destaque:#e28c52; --sobre-destaque:var(--espresso);
+      --foco:#e6a06f;
+    }
+  }
+
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--fg); line-height:1.6; }
-  .wrap { max-width:1000px; margin:0 auto; padding:0 20px; }
-  nav { display:flex; justify-content:space-between; align-items:center; padding:24px 0; }
-  .logo { font-weight:800; font-size:1.3rem; }
-  nav a { color:var(--muted); text-decoration:none; margin-left:20px; }
-  .hero { text-align:center; padding:100px 0 80px; background:url(assets/hero-bg.svg) center/cover no-repeat; border-radius:20px; }
-  .avatar { width:120px; height:120px; margin-bottom:24px; }
-  .logo { display:flex; align-items:center; gap:10px; }
+  body { font:400 16px/24px var(--sans); background:var(--fundo); color:var(--tinta); }
+  .wrap { max-width:1000px; margin:0 auto; padding:0 var(--espaco-4); }
+  a:focus-visible { outline:var(--fio-forte) solid var(--foco); outline-offset:2px; }
+
+  nav { display:flex; justify-content:space-between; align-items:center; gap:var(--espaco-4); padding:var(--espaco-5) 0; border-bottom:var(--fio) solid var(--linha); }
+  .logo { display:flex; align-items:center; gap:var(--espaco-3); font:600 18px/24px var(--sans); color:var(--tinta); text-decoration:none; }
   .logo img { width:32px; height:32px; }
-  .hero h1 { font-size:clamp(2.2rem,6vw,3.8rem); line-height:1.1; margin-bottom:20px; }
-  .hero h1 span { color:var(--accent); }
-  .hero p { color:var(--muted); font-size:1.2rem; max-width:600px; margin:0 auto 36px; }
-  .btn { display:inline-block; background:var(--accent); color:#fff; padding:14px 32px; border-radius:10px; text-decoration:none; font-weight:600; transition:transform .15s; }
-  .btn:hover { transform:translateY(-2px); }
-  .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; padding:40px 0 80px; }
-  .card { background:var(--card); padding:28px; border-radius:14px; }
-  .card h3 { margin-bottom:8px; }
-  .card p { color:var(--muted); }
-  .cta { text-align:center; background:var(--card); border-radius:16px; padding:60px 20px; margin-bottom:60px; }
-  .cta h2 { font-size:2rem; margin-bottom:20px; }
-  footer { text-align:center; color:var(--muted); padding:30px 0; font-size:.9rem; }
+  nav .links a { font:400 16px/24px var(--sans); color:var(--acento-texto); margin-left:var(--espaco-5); }
+
+  .rotulo { font:600 12px/16px var(--sans); letter-spacing:.08em; text-transform:uppercase; color:var(--tinta-suave); }
+
+  .hero { text-align:center; padding:var(--espaco-8) var(--espaco-5); margin-top:var(--espaco-6); background:var(--superficie-kraft); border-radius:var(--raio-2); }
+  .avatar { width:120px; height:120px; margin-bottom:var(--espaco-5); border-radius:var(--raio-cheio); }
+  .hero .rotulo { margin-bottom:var(--espaco-3); }
+  .hero h1 { font:500 clamp(40px,8vw,64px)/1.06 var(--serif); letter-spacing:-.01em; font-variation-settings:"opsz" 72; margin-bottom:var(--espaco-5); }
+  .hero h1 span { color:var(--acento); }
+  .hero p { font:400 18px/28px var(--sans); color:var(--tinta-suave); max-width:600px; margin:0 auto var(--espaco-6); }
+
+  .btn { display:inline-block; font:600 16px/20px var(--sans); background:var(--acao); color:var(--sobre-acao); padding:var(--espaco-3) var(--espaco-5); border-radius:var(--raio-2); text-decoration:none; }
+  .btn:hover { opacity:.9; }
+  .btn-destaque { background:var(--destaque); color:var(--sobre-destaque); }
+
+  .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:var(--espaco-5); padding:var(--espaco-8) 0; }
+  .card { background:var(--superficie); padding:var(--espaco-5); border:var(--fio) solid var(--linha); border-radius:var(--raio-2); }
+  .card .grao { display:block; width:10px; height:14px; border-radius:50%; background:var(--acento); margin-bottom:var(--espaco-4); }
+  .card h3 { font:600 24px/30px var(--serif); font-variation-settings:"opsz" 24; margin-bottom:var(--espaco-2); }
+  .card p { color:var(--tinta-suave); }
+
+  .cta { text-align:center; background:var(--kraft); color:var(--espresso); border-radius:var(--raio-2); padding:var(--espaco-8) var(--espaco-5); margin-bottom:var(--espaco-8); }
+  .cta h2 { font:500 clamp(32px,5vw,44px)/1.14 var(--serif); font-variation-settings:"opsz" 60; margin-bottom:var(--espaco-5); }
+
+  footer { text-align:center; font:400 14px/20px var(--sans); color:var(--tinta-suave); padding:var(--espaco-6) 0; border-top:var(--fio) solid var(--linha); }
+
+  @media (min-width: 768px) {
+    .hero { padding:var(--espaco-9) var(--espaco-6); }
+    .features { padding:var(--espaco-9) 0; }
+    .cta { margin-bottom:var(--espaco-9); }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <nav>
-    <div class="logo"><img src="assets/logo.svg" alt="">Alessandro Cauduro</div>
-    <div><a href="#recursos">Recursos</a><a href="#contato">Contato</a></div>
+    <a class="logo" href="#"><img src="assets/logo.svg" alt="">Alessandro Cauduro</a>
+    <div class="links"><a href="#recursos">Recursos</a><a href="#contato">Contato</a></div>
   </nav>
 
   <section class="hero">
     <img class="avatar" src="assets/avatar.svg" alt="Alessandro Cauduro">
+    <p class="rotulo">Olá, eu sou</p>
     <h1>Alessandro <span>Cauduro</span></h1>
     <p>A ferramenta simples que ajuda você a organizar, automatizar e crescer.</p>
     <a class="btn" href="#contato">Começar agora</a>
   </section>
 
   <section class="features" id="recursos">
-    <div class="card"><h3>🚀 Rápido</h3><p>Configure em minutos, sem complicação.</p></div>
-    <div class="card"><h3>🔒 Seguro</h3><p>Seus dados protegidos de ponta a ponta.</p></div>
-    <div class="card"><h3>📈 Escalável</h3><p>Cresce junto com o seu negócio.</p></div>
+    <div class="card"><span class="grao" aria-hidden="true"></span><h3>Rápido</h3><p>Configure em minutos, sem complicação.</p></div>
+    <div class="card"><span class="grao" aria-hidden="true"></span><h3>Seguro</h3><p>Seus dados protegidos de ponta a ponta.</p></div>
+    <div class="card"><span class="grao" aria-hidden="true"></span><h3>Escalável</h3><p>Cresce junto com o seu negócio.</p></div>
   </section>
 
   <section class="cta" id="contato">
-    <h2>Pronto para começar?</h2>
-    <a class="btn" href="mailto:contato@exemplo.com">Fale conosco</a>
+    <h2>Pronto pra começar?</h2>
+    <a class="btn btn-destaque" href="mailto:contato@exemplo.com">Fale com a gente</a>
   </section>
 
-  <footer>© 2026 Produto. Todos os direitos reservados.</footer>
+  <footer>© 2026 Alessandro Cauduro</footer>
 </div>
 </body>
 </html>
