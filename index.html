@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meu Produto</title>
+<title>Alessandro Cauduro</title>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <style>
   :root { --bg:#0f172a; --fg:#f8fafc; --muted:#94a3b8; --accent:#6366f1; --card:#1e293b; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -12,7 +13,10 @@
   nav { display:flex; justify-content:space-between; align-items:center; padding:24px 0; }
   .logo { font-weight:800; font-size:1.3rem; }
   nav a { color:var(--muted); text-decoration:none; margin-left:20px; }
-  .hero { text-align:center; padding:100px 0 80px; }
+  .hero { text-align:center; padding:100px 0 80px; background:url(assets/hero-bg.svg) center/cover no-repeat; border-radius:20px; }
+  .avatar { width:120px; height:120px; margin-bottom:24px; }
+  .logo { display:flex; align-items:center; gap:10px; }
+  .logo img { width:32px; height:32px; }
   .hero h1 { font-size:clamp(2.2rem,6vw,3.8rem); line-height:1.1; margin-bottom:20px; }
   .hero h1 span { color:var(--accent); }
   .hero p { color:var(--muted); font-size:1.2rem; max-width:600px; margin:0 auto 36px; }
@@ -30,12 +34,13 @@
 <body>
 <div class="wrap">
   <nav>
-    <div class="logo">⚡ Produto</div>
+    <div class="logo"><img src="assets/logo.svg" alt="">Alessandro Cauduro</div>
     <div><a href="#recursos">Recursos</a><a href="#contato">Contato</a></div>
   </nav>
 
   <section class="hero">
-    <h1>Faça mais em <span>menos tempo</span></h1>
+    <img class="avatar" src="assets/avatar.svg" alt="Alessandro Cauduro">
+    <h1>Alessandro <span>Cauduro</span></h1>
     <p>A ferramenta simples que ajuda você a organizar, automatizar e crescer.</p>
     <a class="btn" href="#contato">Começar agora</a>
   </section>
